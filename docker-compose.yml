@@ -1,0 +1,23 @@
+version : "3"
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    depends_on:
+      - db
+    restart: on_failure
+    environment:
+      -  DATABASE_HOST=db
+    volumes:
+      - ./src:/app/src
+    db:
+      image: mysql:5.8
+      ports:
+        - 3306:3306
+      enviroment:
+        - MYSQL_DATABASE: 'testletsgo'
+        - MYSQL_ROOT_PASSWORD: 'S233kaas17102001'
+        - MYSQL_USER=: 'root'
+        - MYSQL_PASSWORD: 'root'
